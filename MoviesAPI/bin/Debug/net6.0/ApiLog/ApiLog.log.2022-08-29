@@ -1,0 +1,6 @@
+2022-08-29 17:45:51,132  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:7160
+ 2022-08-29 17:45:51,180  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5160
+ 2022-08-29 17:45:51,187  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2022-08-29 17:45:51,192  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Hosting environment: Development
+ 2022-08-29 17:45:51,195  INFO Microsoft.Hosting.Lifetime.OnApplicationStarted [0] - MESSAGE: Content root path: C:\Users\Tomislav Zupetic\source\repos\MoviesAPI\MoviesAPI\
+ 

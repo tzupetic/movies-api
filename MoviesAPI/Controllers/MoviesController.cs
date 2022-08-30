@@ -3,6 +3,8 @@ using MoviesAPI.Models;
 using MoviesAPI.Models.ViewModels;
 using Newtonsoft.Json;
 using System.Net;
+using System;
+using System.Web;
 
 namespace MoviesAPI.Controllers
 {
@@ -23,9 +25,9 @@ namespace MoviesAPI.Controllers
         public async Task<ActionResult<MovieViewModel>> GetMovies(string title)
         {
             Movie? movie = new Movie();
-           
+
             string imdbApiKey = configuration.GetValue<string>("IMDBSettings:ApiKey");
-            string imdbUrl = "https://imdb-api.com/en/API/SearchMovie/" + imdbApiKey + "/ " + title;
+            string imdbUrl = "https://imdb-api.com/en/API/SearchMovie/" + imdbApiKey + "/" + title;
 
             using (var response = await client.GetAsync(imdbUrl))
             {
@@ -52,7 +54,7 @@ namespace MoviesAPI.Controllers
                     mvs.title = mr.title;
                     mvs.description = mr.description;
 
-                    var video = await GetVideos(mr.title);
+                    var video = await GetVideos(mr.title + " " + mr.description);
 
                     if (video != null)
                     {
@@ -75,13 +77,13 @@ namespace MoviesAPI.Controllers
 
             return movieVM;
         }
-
         private async Task<Video?> GetVideos(string title)
         {
             Video? video = new Video();
-            
+            string titleEncoded = HttpUtility.UrlEncode(title);
+
             string youTubeApiKey = configuration.GetValue<string>("YouTubeSettings:ApiKey");
-            string youTubeUrl = "https://content-youtube.googleapis.com/youtube/v3/search?part=snippet&q=" + title + " trailer" + "&key=" + youTubeApiKey;
+            string youTubeUrl = "https://content-youtube.googleapis.com/youtube/v3/search?part=snippet&q=" + titleEncoded + "+trailer" + "&key=" + youTubeApiKey;
 
             using (var response = await client.GetAsync(youTubeUrl))
             {
